@@ -133,13 +133,9 @@ int main()
       while (i < arr.size()) 
       {
         if (contain(arr[i], rule)) 
-        {
           arr.erase(i);
-        }
         else 
-        {
-           ++i;
-        }
+          ++i;
       }
 
       printArray(arr);

@@ -71,8 +71,8 @@ public:
     else if (sz == cpct) 
       reserve(cpct * 2);
 
-    for (unsigned int i = sz; i > _index; --i)
-      arr[i] = arr[i - 1];
+    std::move(arr + _index, arr + sz, arr + (_index + 1));
+
     arr[_index] = _value;
     ++sz;
   }
@@ -85,18 +85,17 @@ public:
     if (_index >= sz)
       return;
 
-    for (unsigned int i = _index; i < sz - 1; ++i)
-      arr[i] = arr[i + 1];
+    std::move(arr + (_index + 1), arr + sz, arr + _index);
     --sz;
   }
 
   // Clear array
   void clear() 
   {
-      delete[] arr;
-      arr = nullptr;
-      sz = 0;
-      cpct = 0;
+    delete[] arr;
+    arr = nullptr;
+    sz = 0;
+    cpct = 0;
   }
 
   // Get the size of an array
@@ -114,8 +113,7 @@ public:
       return;
 
     TData* tmp = new TData[_capacity];
-    for (unsigned int i = 0; i < sz; ++i)
-      tmp[i] = arr[i];
+    std::move(arr, arr + sz, tmp);
 
     delete[] arr;
     arr = tmp;

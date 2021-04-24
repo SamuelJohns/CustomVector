@@ -7,7 +7,7 @@ template <typename TData>
 class CArray
 {
 public:
-  // Конструктор по умолчанию
+  // Default constructor
   CArray() :
     sz{ 0 }, 
     cpct{ 0 }, 
@@ -16,7 +16,7 @@ public:
       
   }
 
-  // Копирующий конструктор
+  // Copy constructor
   CArray (
       const CArray& _array
     ) :
@@ -27,14 +27,14 @@ public:
     std::copy(_array, _array + sz, arr);
   }
 
-  // Деструктор
+  // Destructor
   ~CArray() 
   {
     if (sz != 0)
       delete[] arr;
   }
 
-  // Добавить элемент в конец массива
+  // Add an element to the end of an array
   void push_back (
       const TData& _value
     )
@@ -51,7 +51,7 @@ public:
     ++sz;
   }
 
-  // Добавить элемент в массив по заданному индексу
+  // Add an element to an array at a given index
   void insert(
       unsigned int _index, 
       const TData& _value
@@ -71,8 +71,8 @@ public:
     ++sz;
   }
 
-  // Удалить элемент массива по заданному индексу
-  void erase(
+  // Remove array element at given index
+  void erase (
       unsigned int _index
     ) 
   {
@@ -84,7 +84,7 @@ public:
     --sz;
   }
 
-  // Очистить массив
+  // Clear array
   void clear() 
   {
     if (arr != nullptr) 
@@ -95,14 +95,14 @@ public:
     }
   }
 
-  // Получить размер массива
+  // Get the size of an array
   unsigned int size() const 
   {
     return sz;
   }
 
-  // Зарезервировать память
-  void reserve(
+  // Reserve memory
+  void reserve (
       unsigned int _capacity
     ) 
   {
@@ -118,8 +118,8 @@ public:
     arr = tmp;
   }
 
-  // Получить элемент массива по заданному индексу
-  TData& operator[](
+  // Get an element of an array at a given index
+  TData& operator[] (
       unsigned int _index
     ) 
   {
@@ -133,7 +133,7 @@ protected: // Attributes
 };
 
 template <typename T>
-void sort(
+void sort (
     CArray<T>& _arr
   ) 
 {

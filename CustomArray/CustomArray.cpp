@@ -15,18 +15,18 @@ int getRandomInRange(
 }
 
 std::string random_string(
-    size_t length
+    size_t _length
   )
 {
-    auto randchar = []() -> char
-    {
-        const char charset[] = "abcdefghijklmnopqrstuvwxyz";
-        int randCharPos = getRandomInRange(0, sizeof(charset) - 1);
-        return charset[randCharPos];
-    };
-    std::string str(length, 0);
-    std::generate_n(str.begin(), length, randchar);
-    return str;
+  auto randchar = []() -> char
+  {
+    const char charset[] = "abcdefghijklmnopqrstuvwxyz";
+    int randCharPos = getRandomInRange(0, sizeof(charset) - 1);
+    return charset[randCharPos];
+  };
+  std::string str(_length, 0);
+  std::generate_n(str.begin(), _length, randchar);
+  return str;
 }
 
 bool contain(

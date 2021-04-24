@@ -7,6 +7,17 @@ template <typename TData>
 class CArray
 {
 public:
+  // TODO !!!
+  //using data_type TData
+  // size_t вместо unsigned int // почитать
+  // вернуть конструктор перемещения
+  // constexpr size_t для reserve 8
+  // assert 
+  // перенести reserve 8 
+  // insert в позицию size
+  // в insert переделать на move // для 
+  // в деструктор вставить clear
+  
   // Default constructor
   CArray() :
     sz{ 0 }, 
@@ -22,7 +33,7 @@ public:
     ) :
       sz{ _array.sz }, 
       cpct{ _array.cpct }, 
-      arr{ new TData[_array.sz] } 
+      arr{ new TData[_array.cpct] }
   {
     std::copy(_array, _array + sz, arr);
   }
@@ -30,8 +41,7 @@ public:
   // Destructor
   ~CArray() 
   {
-    if (sz != 0)
-      delete[] arr;
+    clear();
   }
 
   // Add an element to the end of an array
@@ -40,13 +50,9 @@ public:
     )
   {
     if (cpct == 0) 
-    {
       reserve(8);
-    }
     else if (sz == cpct) 
-    {
       reserve(cpct * 2);
-    }
     arr[sz] = _value;
     ++sz;
   }
@@ -87,12 +93,10 @@ public:
   // Clear array
   void clear() 
   {
-    if (arr != nullptr) 
-    {
       delete[] arr;
+      arr = nullptr;
       sz = 0;
       cpct = 0;
-    }
   }
 
   // Get the size of an array
@@ -106,16 +110,30 @@ public:
       unsigned int _capacity
     ) 
   {
-    if (_capacity < cpct)
+    if (_capacity < sz)
       return;
 
     TData* tmp = new TData[_capacity];
     for (unsigned int i = 0; i < sz; ++i)
       tmp[i] = arr[i];
-    if (arr != nullptr)
-      delete[] arr;
-    cpct = _capacity;
+
+    delete[] arr;
     arr = tmp;
+    cpct = _capacity;
+  }
+
+  void sort ()
+  {
+    for (unsigned int i = 1; i < sz; ++i)
+    {
+      for (unsigned int j = 0; j < sz - i; ++j)
+      {
+        if (arr[j] > arr[j + 1])
+        {
+          std::swap(arr[j], arr[j + 1]);
+        }
+      }
+    }
   }
 
   // Get an element of an array at a given index
@@ -123,34 +141,16 @@ public:
       unsigned int _index
     ) 
   {
+    // TODO ASSERT _index < size
+    // TODO add const version
     return arr[_index];
   }
 
-protected: // Attributes
+private: // Attributes
   unsigned int sz;
   unsigned int cpct;
   TData* arr;
 };
-
-template <typename T>
-void sort (
-    CArray<T>& _arr
-  ) 
-{
-  unsigned int size = _arr.size();
-  for (unsigned int i = 1; i < size; ++i) 
-  {
-    for (unsigned int j = 0; j < size - i; ++j) 
-    {
-      if (_arr[j] > _arr[j + 1]) 
-      {
-        T elm = _arr[j];
-        _arr[j] = _arr[j + 1];
-        _arr[j + 1] = elm;
-      }
-    }
-  }
-}
 
 template <typename T>
 void printArray(

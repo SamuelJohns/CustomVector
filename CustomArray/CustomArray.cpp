@@ -60,7 +60,7 @@ int main()
     {
       std::cout << std::endl << "1.2 Sort " << std::endl;
 
-      sort(arr);
+      arr.sort();
 
       printArray(arr);
     }
@@ -119,7 +119,7 @@ int main()
     {
       std::cout << std::endl << "2.2 Sort " << std::endl;
 
-      sort(arr);
+      arr.sort();
 
       printArray(arr);
     }

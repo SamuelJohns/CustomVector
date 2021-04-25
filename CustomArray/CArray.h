@@ -26,6 +26,17 @@ public:
       
   }
 
+  // Initialization list constructor
+  CArray (
+      std::initializer_list<value_type> _arr
+    ) :
+      sz {_arr.size() },
+      cpct { _arr.size() },
+      arr { new value_type[_arr.size()]}
+  {
+    std::copy(_arr.begin(), _arr.end(), arr);
+  }
+
   // Copy constructor
   CArray (
       const CArray& _array
@@ -34,7 +45,7 @@ public:
       cpct{ _array.cpct }, 
       arr{ new value_type[_array.cpct] }
   {
-    std::copy(_array, _array + sz, arr);
+    std::copy(_array.arr, _array.arr + sz, arr);
   }
 
   // Destructor
@@ -101,6 +112,12 @@ public:
     return sz;
   }
 
+  // Get the capacity of an array
+  unsigned int capacity() const
+  {
+    return cpct;
+  }
+
   // Reserve memory
   void reserve (
       unsigned int _capacity
@@ -140,7 +157,17 @@ public:
     // TODO add const version
     return arr[_index];
   }
-
+  
+  bool operator== (
+      const CArray<value_type>& _arrCmpr
+    )
+  {
+    if (_arrCmpr.size() != sz) {
+      return false;
+    }
+    return std::equal(arr, arr + sz, _arrCmpr.arr);
+  }
+  
 private:
   static constexpr size_t default_capacity = 8;
   unsigned int sz;

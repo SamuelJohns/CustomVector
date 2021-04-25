@@ -1,4 +1,6 @@
 ﻿#include "CArray.h"
+#include "Tests.h"
+
 #include <random>
 #include <string>
 #include <iostream>
@@ -44,6 +46,9 @@ bool contain(
 
 int main()
 {
+  Tests tst;
+  tst.run();
+
   {
     CArray<int> arr;
     // 1.1

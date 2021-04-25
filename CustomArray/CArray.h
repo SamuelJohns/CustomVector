@@ -73,7 +73,7 @@ public:
       const value_type& _value
     ) 
   {
-    assert(_index < sz);
+    assert(_index <= sz);
 
     if (cpct == 0) 
       reserve(default_capacity);
@@ -123,7 +123,7 @@ public:
       unsigned int _capacity
     ) 
   {
-    if (_capacity < sz)
+    if (_capacity < sz || _capacity == cpct)
       return;
 
     value_type* tmp = new value_type[_capacity];
@@ -153,8 +153,18 @@ public:
       unsigned int _index
     ) 
   {
-    // TODO ASSERT _index < size
-    // TODO add const version
+    assert(_index < sz);
+    
+    return arr[_index];
+  }
+
+  // Get an element of an array at a given index
+  const value_type& operator[] (
+    unsigned int _index
+    ) const
+  {
+    assert(_index < sz);
+
     return arr[_index];
   }
   

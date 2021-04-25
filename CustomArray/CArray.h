@@ -14,7 +14,6 @@ public:
   // size_t вместо unsigned int // почитать
   // вернуть конструктор перемещения
   // constexpr size_t для reserve 8
-  // assert 
   // перенести reserve 8 
   // insert в позицию size
   
@@ -50,7 +49,7 @@ public:
     )
   {
     if (cpct == 0) 
-      reserve(8);
+      reserve(default_capacity);
     else if (sz == cpct) 
       reserve(cpct * 2);
     arr[sz] = _value;
@@ -66,11 +65,11 @@ public:
     assert(_index < sz);
 
     if (cpct == 0) 
-      reserve(8);
+      reserve(default_capacity);
     else if (sz == cpct) 
       reserve(cpct * 2);
 
-    std::move(arr + _index, arr + sz, arr + (_index + 1));
+    std::move_backward(arr + _index, arr + sz, arr + (sz + 1));
 
     arr[_index] = _value;
     ++sz;
@@ -142,7 +141,8 @@ public:
     return arr[_index];
   }
 
-private: // Attributes
+private:
+  static constexpr size_t default_capacity = 8;
   unsigned int sz;
   unsigned int cpct;
   value_type* arr;

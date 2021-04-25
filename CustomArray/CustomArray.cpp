@@ -21,7 +21,7 @@ std::string random_string(
   auto randchar = []() -> char
   {
     const char charset[] = "abcdefghijklmnopqrstuvwxyz";
-    int randCharPos = getRandomInRange(0, sizeof(charset) - 1);
+    int randCharPos = getRandomInRange(0, sizeof(charset) - 2);
     return charset[randCharPos];
   };
   std::string str(_length, 0);

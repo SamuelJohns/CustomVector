@@ -13,9 +13,7 @@ public:
 
   // size_t вместо unsigned int // почитать
   // вернуть конструктор перемещения
-  // constexpr size_t для reserve 8
   // перенести reserve 8 
-  // insert в позицию size
   
   // Default constructor
   CArray() :
@@ -63,6 +61,7 @@ public:
       reserve(default_capacity);
     else if (sz == cpct) 
       reserve(cpct * 2);
+
     arr[sz] = _value;
     ++sz;
   }
@@ -123,7 +122,7 @@ public:
       unsigned int _capacity
     ) 
   {
-    if (_capacity < sz || _capacity == cpct)
+    if (_capacity <=  cpct)
       return;
 
     value_type* tmp = new value_type[_capacity];

@@ -54,8 +54,8 @@ public:
       CArray<std::string> arr{ "0", "1", "2" };
 
       bool flag = arr[0] == "0" &&
-        arr[1] == "1" &&
-        arr[2] == "2";
+                  arr[1] == "1" &&
+                  arr[2] == "2";
 
       calculate(flag);
       std::cout << "Initialization list constructor of std::string: " << (flag ? "Passed" : "Failed") << std::endl;
@@ -138,7 +138,7 @@ public:
       CArray<int> arrCmpr{ 0, 1, 2, 5 };
 
       bool flag = (arr == arrCmpr) &&
-        arr.size() == arrCmpr.size();
+                  arr.size() == arrCmpr.size();
 
       calculate(flag);
       std::cout << "Insert at the end: " << (flag ? "Passed" : "Failed") << std::endl;
@@ -151,7 +151,7 @@ public:
       CArray<int> arrCmpr{ 0, 5, 1, 2 };
 
       bool flag = (arr == arrCmpr) &&
-        arr.size() == arrCmpr.size();
+                  arr.size() == arrCmpr.size();
 
       calculate(flag);
       std::cout << "Insert in the middle: " << (flag ? "Passed" : "Failed") << std::endl;
@@ -164,7 +164,7 @@ public:
       CArray<int> arrCmpr{ 5 };
 
       bool flag = (arr == arrCmpr) &&
-        arr.size() == arrCmpr.size();
+                  arr.size() == arrCmpr.size();
 
       calculate(flag);
       std::cout << "Insert into empty array: " << (flag ? "Passed" : "Failed") << std::endl;
@@ -180,7 +180,7 @@ public:
       CArray<int> arrCmpr{ 1, 2 };
       
       bool flag = (arr == arrCmpr) &&
-        arr.size() == arrCmpr.size();
+                  arr.size() == arrCmpr.size();
 
       calculate(flag);
       std::cout << "Erase first element for integers: " << (flag ? "Passed" : "Failed") << std::endl;
@@ -206,7 +206,7 @@ public:
       CArray<int> arrCmpr{ 0, 1 };
 
       bool flag = (arr == arrCmpr) &&
-        arr.size() == arrCmpr.size();
+                  arr.size() == arrCmpr.size();
 
       calculate(flag);
       std::cout << "Erase last element for integers: " << (flag ? "Passed" : "Failed") << std::endl;
@@ -266,12 +266,12 @@ public:
 
   void checkReserve()
   {
-    // Reserve of capacity bigger than size for integers
+    // Reserve of capacity bigger than current capacity for integers
     {
       CArray<int> arr{ 0, 1, 2 ,3 };
       CArray<int> arrCmpr{ 0, 1, 2 ,3 };
       unsigned int sz = arr.size();
-      unsigned int expectedCapacity = 5;
+      unsigned int expectedCapacity = 100;
       arr.reserve(expectedCapacity);
 
       bool flag = arr.size() == sz &&
@@ -279,26 +279,26 @@ public:
                   arr == arrCmpr;
 
       calculate(flag);
-      std::cout << "Reserve of capacity bigger than size for integers: " << (flag ? "Passed" : "Failed") << std::endl;
+      std::cout << "Reserve of capacity bigger than current capacity for integers: " << (flag ? "Passed" : "Failed") << std::endl;
     }
 
-    // Reserve of capacity bigger than size for std::string
+    // Reserve of capacity bigger than current capacity for std::string
     {
       CArray<std::string> arr{ "0", "1", "2" ,"3" };
       CArray<std::string> arrCmpr{ "0", "1", "2" ,"3" };
       unsigned int sz = arr.size();
-      unsigned int expectedCapacity = 5;
+      unsigned int expectedCapacity = 100;
       arr.reserve(expectedCapacity);
 
       bool flag = arr.size() == sz &&
-        arr.capacity() == expectedCapacity &&
-        arr == arrCmpr;
+                  arr.capacity() == expectedCapacity &&
+                  arr == arrCmpr;
 
       calculate(flag);
-      std::cout << "Reserve of capacity bigger than size for std::string: " << (flag ? "Passed" : "Failed") << std::endl;
+      std::cout << "Reserve of capacity bigger than current capacity for std::string: " << (flag ? "Passed" : "Failed") << std::endl;
     }
 
-    // Reserve of capacity less than size for integers
+    // Reserve of capacity less than current capacity for integers
     {
       CArray<int> arr{ 0, 1, 2 ,3 };
       CArray<int> arrCmpr{ 0, 1, 2 ,3 };
@@ -311,7 +311,7 @@ public:
                   arr == arrCmpr;
 
       calculate(flag);
-      std::cout << "Reserve of capacity less than size for integers: " << (flag ? "Passed" : "Failed") << std::endl;
+      std::cout << "Reserve of capacity less than current capacity for integers: " << (flag ? "Passed" : "Failed") << std::endl;
     }
 
     // Reserve of capacity less than size for std::string
@@ -323,8 +323,8 @@ public:
       arr.reserve(1);
 
       bool flag = arr.size() == sz &&
-        arr.capacity() == cpct &&
-        arr == arrCmpr;
+                  arr.capacity() == cpct &&
+                  arr == arrCmpr;
 
       calculate(flag);
       std::cout << "Reserve of capacity less than size for std::string: " << (flag ? "Passed" : "Failed") << std::endl;

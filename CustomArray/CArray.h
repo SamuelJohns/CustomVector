@@ -9,11 +9,6 @@ class CArray
 {
 public:
   using value_type = TData;
-  // TODO !!!
-
-  // size_t вместо unsigned int // почитать
-  // вернуть конструктор перемещения
-  // перенести reserve 8 
   
   // Default constructor
   CArray() :
@@ -57,11 +52,7 @@ public:
       const value_type& _value
     )
   {
-    if (cpct == 0) 
-      reserve(default_capacity);
-    else if (sz == cpct) 
-      reserve(cpct * 2);
-
+    increaseCapacityIfNeeded();
     arr[sz] = _value;
     ++sz;
   }
@@ -74,11 +65,7 @@ public:
   {
     assert(_index <= sz);
 
-    if (cpct == 0) 
-      reserve(default_capacity);
-    else if (sz == cpct) 
-      reserve(cpct * 2);
-
+    increaseCapacityIfNeeded();
     std::move_backward(arr + _index, arr + sz, arr + (sz + 1));
 
     arr[_index] = _value;
@@ -174,6 +161,14 @@ public:
       return false;
     }
     return std::equal(arr, arr + sz, _arrCmpr.arr);
+  }
+private:
+  inline void increaseCapacityIfNeeded()
+  {
+    if (cpct == 0)
+      reserve(default_capacity);
+    else if (sz == cpct)
+      reserve(cpct * 2);
   }
   
 private:

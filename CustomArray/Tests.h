@@ -270,8 +270,8 @@ public:
     {
       CArray<int> arr{ 0, 1, 2 ,3 };
       CArray<int> arrCmpr{ 0, 1, 2 ,3 };
-      unsigned int sz = arr.size();
-      unsigned int expectedCapacity = 100;
+      size_t sz = arr.size();
+      size_t expectedCapacity = 100;
       arr.reserve(expectedCapacity);
 
       bool flag = arr.size() == sz &&
@@ -286,8 +286,8 @@ public:
     {
       CArray<std::string> arr{ "0", "1", "2" ,"3" };
       CArray<std::string> arrCmpr{ "0", "1", "2" ,"3" };
-      unsigned int sz = arr.size();
-      unsigned int expectedCapacity = 100;
+      size_t sz = arr.size();
+      size_t expectedCapacity = 100;
       arr.reserve(expectedCapacity);
 
       bool flag = arr.size() == sz &&
@@ -302,8 +302,8 @@ public:
     {
       CArray<int> arr{ 0, 1, 2 ,3 };
       CArray<int> arrCmpr{ 0, 1, 2 ,3 };
-      unsigned int sz = arr.size();
-      unsigned int cpct = arr.capacity();
+      size_t sz = arr.size();
+      size_t cpct = arr.capacity();
       arr.reserve(1);
 
       bool flag = arr.size() == sz &&
@@ -318,8 +318,8 @@ public:
     {
       CArray<std::string> arr{ "0", "1", "2" ,"3" };
       CArray<std::string> arrCmpr{ "0", "1", "2" ,"3" };
-      unsigned int sz = arr.size();
-      unsigned int cpct = arr.capacity();
+      size_t sz = arr.size();
+      size_t cpct = arr.capacity();
       arr.reserve(1);
 
       bool flag = arr.size() == sz &&

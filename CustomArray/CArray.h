@@ -59,7 +59,7 @@ public:
 
   // Add an element to an array at a given index
   void insert(
-      unsigned int _index, 
+      size_t _index,
       const value_type& _value
     ) 
   {
@@ -74,7 +74,7 @@ public:
 
   // Remove array element at given index
   void erase (
-      unsigned int _index
+      size_t _index
     ) 
   {
     assert(_index < sz);
@@ -93,20 +93,20 @@ public:
   }
 
   // Get the size of an array
-  unsigned int size() const 
+  size_t size() const
   {
     return sz;
   }
 
   // Get the capacity of an array
-  unsigned int capacity() const
+  size_t capacity() const
   {
     return cpct;
   }
 
   // Reserve memory
   void reserve (
-      unsigned int _capacity
+      size_t _capacity
     ) 
   {
     if (_capacity <=  cpct)
@@ -123,9 +123,9 @@ public:
   // Sort array
   void sort ()
   {
-    for (unsigned int i = 1; i < sz; ++i)
+    for (size_t i = 1; i < sz; ++i)
     {
-      for (unsigned int j = 0; j < sz - i; ++j)
+      for (size_t j = 0; j < sz - i; ++j)
       {
         if (arr[j] > arr[j + 1])
           std::swap(arr[j], arr[j + 1]);
@@ -135,7 +135,7 @@ public:
 
   // Get an element of an array at a given index
   value_type& operator[] (
-      unsigned int _index
+      size_t _index
     ) 
   {
     assert(_index < sz);
@@ -145,7 +145,7 @@ public:
 
   // Get an element of an array at a given index
   const value_type& operator[] (
-    unsigned int _index
+      size_t _index
     ) const
   {
     assert(_index < sz);
@@ -173,8 +173,8 @@ private:
   
 private:
   static constexpr size_t default_capacity = 8;
-  unsigned int sz;
-  unsigned int cpct;
+  size_t sz;
+  size_t cpct;
   value_type* arr;
 };
 
@@ -184,7 +184,7 @@ void printArray(
   ) 
 {
   std::cout << "Array: ";
-  for (unsigned int i = 0; i < _arr.size(); ++i)
+  for (size_t i = 0; i < _arr.size(); ++i)
     std::cout << _arr[i] << " ";
   std::cout << std::endl;
 }

@@ -36,7 +36,7 @@ bool contain(
     const std::string& _rule
   ) 
 {
-  for (unsigned int i = 0; i < _rule.length(); ++i) {
+  for (size_t i = 0; i < _rule.length(); ++i) {
     if (_source.find(_rule.at(i)) != std::string::npos) {
       return true;
     }
@@ -74,8 +74,8 @@ int main()
     {
       std::cout << std::endl << "1.3 Remove every second item :  " << std::endl;
 
-      unsigned int maxPos = arr.size() / 2;
-      for (unsigned int i = 1; i <= maxPos; ++i)
+      size_t maxPos = arr.size() / 2;
+      for (size_t i = 1; i <= maxPos; ++i)
         arr.erase(i);
 
       printArray(arr);
@@ -134,7 +134,7 @@ int main()
       std::cout << std::endl << "2.3 Remove all words containing the following characters : 'a','b','c','d','e' :" << std::endl;
 
       std::string rule = "abcde";
-      unsigned int i = 0;
+      size_t i = 0;
       while (i < arr.size()) 
       {
         if (contain(arr[i], rule)) 

@@ -2,21 +2,21 @@
 
 #include <algorithm>
 #include <iostream>
+#include <cassert>
 
 template <typename TData>
 class CArray
 {
 public:
+  using value_type = TData;
   // TODO !!!
-  //using data_type TData
+
   // size_t вместо unsigned int // почитать
   // вернуть конструктор перемещения
   // constexpr size_t для reserve 8
   // assert 
   // перенести reserve 8 
   // insert в позицию size
-  // в insert переделать на move // для 
-  // в деструктор вставить clear
   
   // Default constructor
   CArray() :
@@ -33,7 +33,7 @@ public:
     ) :
       sz{ _array.sz }, 
       cpct{ _array.cpct }, 
-      arr{ new TData[_array.cpct] }
+      arr{ new value_type[_array.cpct] }
   {
     std::copy(_array, _array + sz, arr);
   }
@@ -46,7 +46,7 @@ public:
 
   // Add an element to the end of an array
   void push_back (
-      const TData& _value
+      const value_type& _value
     )
   {
     if (cpct == 0) 
@@ -60,11 +60,10 @@ public:
   // Add an element to an array at a given index
   void insert(
       unsigned int _index, 
-      const TData& _value
+      const value_type& _value
     ) 
   {
-    if (_index >= sz) 
-      return;
+    assert(_index < sz);
 
     if (cpct == 0) 
       reserve(8);
@@ -82,8 +81,7 @@ public:
       unsigned int _index
     ) 
   {
-    if (_index >= sz)
-      return;
+    assert(_index < sz);
 
     std::move(arr + (_index + 1), arr + sz, arr + _index);
     --sz;
@@ -112,7 +110,7 @@ public:
     if (_capacity < sz)
       return;
 
-    TData* tmp = new TData[_capacity];
+    value_type* tmp = new value_type[_capacity];
     std::move(arr, arr + sz, tmp);
 
     delete[] arr;
@@ -135,7 +133,7 @@ public:
   }
 
   // Get an element of an array at a given index
-  TData& operator[] (
+  value_type& operator[] (
       unsigned int _index
     ) 
   {
@@ -147,7 +145,7 @@ public:
 private: // Attributes
   unsigned int sz;
   unsigned int cpct;
-  TData* arr;
+  value_type* arr;
 };
 
 template <typename T>

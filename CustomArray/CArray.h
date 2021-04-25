@@ -133,6 +133,7 @@ public:
     cpct = _capacity;
   }
 
+  // Sort array
   void sort ()
   {
     for (unsigned int i = 1; i < sz; ++i)
@@ -140,9 +141,7 @@ public:
       for (unsigned int j = 0; j < sz - i; ++j)
       {
         if (arr[j] > arr[j + 1])
-        {
           std::swap(arr[j], arr[j + 1]);
-        }
       }
     }
   }
